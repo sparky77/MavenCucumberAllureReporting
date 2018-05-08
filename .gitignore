@@ -1,0 +1,67 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Java template
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+.idea
+*.iml
+target
+.allure/allure-2.0.1/bin/
+.allure/allure-2.0.1/config/
+.allure/allure-2.0.1/lib/config/
+.allure/allure-2.0.1/plugins/README.txt
+.allure/allure-2.0.1/plugins/behaviors-plugin/allure-plugin.yml
+.allure/allure-2.0.1/plugins/behaviors-plugin/static/
+.allure/allure-2.0.1/plugins/custom-logo-plugin/
+.allure/allure-2.0.1/plugins/junit-plugin/allure-plugin.yml
+.allure/allure-2.0.1/plugins/packages-plugin/allure-plugin.yml
+.allure/allure-2.0.1/plugins/packages-plugin/static/
+.allure/allure-2.0.1/plugins/screen-diff-plugin/
+.allure/allure-2.3.1/bin/
+.allure/allure-2.3.1/config/
+.allure/allure-2.3.1/lib/config/
+.allure/allure-2.3.1/plugins/README.txt
+.allure/allure-2.3.1/plugins/behaviors-plugin/allure-plugin.yml
+.allure/allure-2.3.1/plugins/behaviors-plugin/static/
+.allure/allure-2.3.1/plugins/custom-logo-plugin/
+.allure/allure-2.3.1/plugins/junit-xml-plugin/allure-plugin.yml
+.allure/allure-2.3.1/plugins/packages-plugin/allure-plugin.yml
+.allure/allure-2.3.1/plugins/packages-plugin/static/
+.allure/allure-2.3.1/plugins/screen-diff-plugin/
+.allure/allure-2.3.1/plugins/trx-plugin/allure-plugin.yml
+.allure/allure-2.3.1/plugins/xunit-xml-plugin/allure-plugin.yml
+.idea/
+MavenCucumberTestProj.iml
+
+
+target/classes/
+target/cucumber-report/
+target/generated-test-sources/
+target/javadoc-bundle-options/
+target/maven-archiver/
+target/maven-status/
+target/surefire-reports/
+target/test-classes/drivers/
+target/test-classes/features/
+target/test-classes/properties/

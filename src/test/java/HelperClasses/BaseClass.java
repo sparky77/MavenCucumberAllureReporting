@@ -41,10 +41,17 @@ public class BaseClass {
         return WebDriverTypeConfig.driver.findElement(locator);
     }
 
+    //public WebElement click()
+
     // Below is experimental - but working with intergrated fluent wait
-    public void click(By locator){
+    public void click(By locator)throws Exception{
         WebDriverWait wait = new WebDriverWait(WebDriverTypeConfig.driver,10);
         wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+    }
+
+    public void click(WebElement eleName) throws InterruptedException {
+        Thread.sleep(5000);
+        eleName.click();
     }
 
     // Untested

@@ -7,7 +7,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public abstract class WebDriverTypeConfig {
     private final String resourceDriverLocation = "/src/test/resources/drivers/";
@@ -17,7 +21,7 @@ public abstract class WebDriverTypeConfig {
     private File classPathRoot;
     public static WebDriver driver; // static driver so can be shared with other Pages and does not need instantiation
 
-    protected WebDriver lauchDriverType(String driverType){
+    protected WebDriver lauchDriverType(String driverType) throws MalformedURLException {
         classPathRoot = new File(System.getProperty("user.dir"));
         osType = getOSType();
         checkWebDriverUniqueInstance();
@@ -30,17 +34,26 @@ public abstract class WebDriverTypeConfig {
                 phantomJSDriverOSPathConstructor();
                 break;
             case "firefox":
-                System.out.println("Firing up Fire FOX ");
-                System.out.println(getOSType());
-                modifiedOSDriverLocation = classPathRoot + resourceDriverLocation + "Win/geckodriver.exe";
-                // C:\Users\marcus\Documents\MavenCucumberTestProj/src/test/resources/drivers//Win/chromedriver.exe
-                // C:\Users\marcus\Documents\MavenCucumberTestProj/src/test/resources/drivers/Win/geckodriver.exe
-                System.out.println(modifiedOSDriverLocation);
-                System.setProperty("webdriver.gecko.driver", modifiedOSDriverLocation);
-                driver = new FirefoxDriver();
+                fireFoxDriverOSPathConstructor();
                 break;
+            case "grid":
+                System.out.println("Grid setup to go here");
+                DesiredCapabilities caps = new DesiredCapabilities();
+                // set desired caps - i.e. Chrome etc - will be DOCKER setup
+                // IP below is not valid - just example - DOCKER GRID HUB will advertise correct URL
+                driver = new RemoteWebDriver(new URL("http://10.0.0.152:4444/wd/hub"),caps);
+                break;
+
+            default:
+                System.out.println("ERROR :: WEB DRIVER CHOICE NOT RECOGNISED ");
         }
         return driver;
+    }
+
+    private void fireFoxDriverOSPathConstructor() {
+        modifiedOSDriverLocation = classPathRoot + resourceDriverLocation + "Win/geckodriver.exe";
+        System.setProperty("webdriver.gecko.driver", modifiedOSDriverLocation);
+        driver = new FirefoxDriver();
     }
 
     private void phantomJSDriverOSPathConstructor() {

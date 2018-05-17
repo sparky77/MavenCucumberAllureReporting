@@ -22,8 +22,7 @@ public class BaseClass {
     public WebDriverLaucher driverLauncher;
 
     public static String setBaseUrl(){
-        String baseUrl = "https://www.tesco.com/";
-        return baseUrl;
+        return ReadFrom.propertiesFile("defaultSetupProperties","url");
     }
 
     public void startDriver(){

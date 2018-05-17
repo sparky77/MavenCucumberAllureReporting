@@ -30,8 +30,15 @@ public abstract class WebDriverTypeConfig {
                 phantomJSDriverOSPathConstructor();
                 break;
             case "firefox":
-                System.setProperty("webdriver.firefox.driver", fullPathToDrivers + "geckodriver.exe");
+                System.out.println("Firing up Fire FOX ");
+                System.out.println(getOSType());
+                modifiedOSDriverLocation = classPathRoot + resourceDriverLocation + "Win/geckodriver.exe";
+                // C:\Users\marcus\Documents\MavenCucumberTestProj/src/test/resources/drivers//Win/chromedriver.exe
+                // C:\Users\marcus\Documents\MavenCucumberTestProj/src/test/resources/drivers/Win/geckodriver.exe
+                System.out.println(modifiedOSDriverLocation);
+                System.setProperty("webdriver.gecko.driver", modifiedOSDriverLocation);
                 driver = new FirefoxDriver();
+                break;
         }
         return driver;
     }
@@ -52,6 +59,7 @@ public abstract class WebDriverTypeConfig {
             modifiedOSDriverLocation = classPathRoot + resourceDriverLocation + "Mac/chromedriver";
         } else if (osType.contains("Windows")) {
             modifiedOSDriverLocation = classPathRoot + resourceDriverLocation + "/Win/chromedriver.exe";
+            System.out.println("Chome location : " +modifiedOSDriverLocation);
         }
         System.setProperty("webdriver.chrome.driver", modifiedOSDriverLocation);
         driver = new ChromeDriver();

@@ -3,6 +3,7 @@ package HelperClasses.WebDriver;
 import HelperClasses.ReadFrom;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -28,6 +29,9 @@ public abstract class WebDriverTypeConfig {
             case "phantomjs":
                 phantomJSDriverOSPathConstructor();
                 break;
+            case "firefox":
+                System.setProperty("webdriver.firefox.driver", fullPathToDrivers + "geckodriver.exe");
+                driver = new FirefoxDriver();
         }
         return driver;
     }

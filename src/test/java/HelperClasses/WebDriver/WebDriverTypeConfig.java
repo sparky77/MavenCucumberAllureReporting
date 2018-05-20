@@ -25,7 +25,7 @@ public abstract class WebDriverTypeConfig {
     protected WebDriver lauchDriverType(String driverType) throws MalformedURLException {
         classPathRoot = new File(System.getProperty("user.dir"));
         osType = getOSType();
-        checkWebDriverUniqueInstance();
+        //checkWebDriverUniqueInstance();
 
         switch(driverType.toLowerCase()) {
             case "chrome":
@@ -37,7 +37,7 @@ public abstract class WebDriverTypeConfig {
             case "firefox":
                 fireFoxDriverOSPathConstructor();
                 break;
-            case "grid":
+            case "gridchrome":
                 System.out.println("Grid setup to go here");
                 caps = DesiredCapabilities.chrome();
                 caps.setCapability("version","");
@@ -104,7 +104,7 @@ public abstract class WebDriverTypeConfig {
 
     public void CloseWebDriver(){
         driver.quit();
-        driver = null;
+        //driver = null;
     }
 
 }

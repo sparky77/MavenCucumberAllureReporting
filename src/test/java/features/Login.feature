@@ -20,6 +20,7 @@ Feature: BasicTescoPOCTests
     Scenario Outline: Validate title for page is correct
       When User navigates to "<url>"
       Then the title should be "<title>"
+      And close down webDriver Gracefully
 
       Examples:
         |url                                              | title                                                                 |

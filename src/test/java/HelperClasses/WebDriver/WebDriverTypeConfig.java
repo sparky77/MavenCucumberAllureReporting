@@ -19,6 +19,7 @@ public abstract class WebDriverTypeConfig {
     final String driverType = ReadFrom.propertiesFile("defaultSetupProperties","driverType");
     private String osType;
     private File classPathRoot;
+    DesiredCapabilities caps;
     public static WebDriver driver; // static driver so can be shared with other Pages and does not need instantiation
 
     protected WebDriver lauchDriverType(String driverType) throws MalformedURLException {
@@ -38,10 +39,17 @@ public abstract class WebDriverTypeConfig {
                 break;
             case "grid":
                 System.out.println("Grid setup to go here");
-                DesiredCapabilities caps = new DesiredCapabilities();
-                // set desired caps - i.e. Chrome etc - will be DOCKER setup
-                // IP below is not valid - just example - DOCKER GRID HUB will advertise correct URL
-                driver = new RemoteWebDriver(new URL("http://10.0.0.152:4444/wd/hub"),caps);
+                caps = DesiredCapabilities.chrome();
+                caps.setCapability("version","");
+                caps.setCapability("platform","LINUX");
+                driver = new RemoteWebDriver(new URL("http://localhost:4446/wd/hub"),caps);
+                break;
+            case "gridfirefox":
+                System.out.println("Grid setup to go here");
+                caps = DesiredCapabilities.firefox();
+                caps.setCapability("version","");
+                caps.setCapability("platform","LINUX");
+                driver = new RemoteWebDriver(new URL("http://localhost:4446/wd/hub"),caps);
                 break;
 
             default:
@@ -84,9 +92,13 @@ public abstract class WebDriverTypeConfig {
 
     private void checkWebDriverUniqueInstance(){
         if (driver == null){ // singleton type patten - only want one instance of webDriver
+            System.out.println("\n ************************************************** \n");
             System.out.println("\nOriginal Driver instance ... launching : " + driverType);
+            System.out.println("\n ************************************************** \n");
         } else {
-            System.out.println("Cannot launch another driver instance - already assigned to : " + driverType);
+            System.out.println("\n ************************************************** \n");
+            System.out.println("\nCannot launch another driver instance - already assigned to : " + driverType);
+            System.out.println("\n ************************************************** \n");
         }
     }
 

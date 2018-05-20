@@ -25,7 +25,7 @@ public class BaseClass {
         return ReadFrom.propertiesFile("defaultSetupProperties","url");
     }
 
-    public void startDriver(){
+    public void startDriver() throws MalformedURLException {
        driverLauncher = new WebDriverLaucher();
     }
 

@@ -35,6 +35,14 @@
             <version>1.6.1</version>
         </dependency>
 
+        <!-- REST ASSURED -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>3.2.0</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Cucumber -->
         <dependency>
             <groupId>info.cukes</groupId>

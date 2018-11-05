@@ -32,6 +32,7 @@ public class BaseClass {
     public void closeDownWebDriver(){
         driverLauncher.CloseWebDriver();
     }
+
     public void visit(String url){
         WebDriverTypeConfig.driver.get(url);
     }

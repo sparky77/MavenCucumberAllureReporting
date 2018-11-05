@@ -13,6 +13,9 @@ Feature: BasicTescoPOCTests
     Then Test to return the HTTP responce of the server
     And close down webDriver Gracefully
 
+    Scenario: RestAssured GET request - SWAPI
+      Then Test Rest Assured - GET LUKE SKYWALKER
+
   Scenario: Guest users visits Tescos page and clicks on the x Cookie icon
     Then User clicks on close cookie policy button
     And close down webDriver Gracefully
@@ -23,10 +26,10 @@ Feature: BasicTescoPOCTests
       And close down webDriver Gracefully
 
       Examples:
-        |url                                              | title                                                                 |
-        | http://www.tesco.com                            | Tesco - Online Groceries, Homeware, Electricals & Clothing            |
-        | https://www.google.co.uk/                       | Google                                                                 |
-        | https://www.tesco.com/direct/gaming/            | Video Games & Consoles \| Technology & Gaming - Tesco - Tesco          |
+        |url                                              | title                                                                   |
+        | http://www.tesco.com                            | Tesco :: Online Groceries, Banking & Mobile Phones                      |
+        | https://www.google.co.uk/                       | Google                                                                  |
+        | https://www.tesco.com/direct/gaming/            | Gaming - Tesco Groceries                                                |
 
 
 

@@ -10,6 +10,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.authentication.PreemptiveBasicAuthScheme;
+import io.restassured.http.Cookie;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.After;
@@ -21,7 +22,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
+import java.util.Map;
 
+import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
@@ -42,12 +45,12 @@ public class APIStepdefs extends BaseClass{
     public void RestAssuredTest() throws Throwable {
        String baseURL = "http://swapi.co/api/";
        String lukeSW = "people/1/";
-       RestAssured.get(baseURL+lukeSW).then().assertThat().body("name",equalTo("Luke Skywalker"));
+       get(baseURL+lukeSW).then().assertThat().body("name",equalTo("Luke Skywalker"));
     }
 
     @Then("^Rest Assured - return all information$")
     public void RestAssuredReturnAllInformation() {
-        Response response = RestAssured.get("http://swapi.co/api/people/1/").andReturn();
+        Response response = get("http://swapi.co/api/people/1/").andReturn();
         String jsonResponce = response.getBody().asString();
         System.out.println("API response : \n" + jsonResponce);
     }
@@ -57,7 +60,7 @@ public class APIStepdefs extends BaseClass{
     public void restAssuredReturnAllInformationUsingJasonPath() throws Throwable {
         //String response = RestAssured.get("http://swapi.co/api/people/1/").andReturn().getBody().asString();
         //String json = response.getBody().asString();
-        JsonPath jsonPath = new JsonPath(RestAssured.get("http://swapi.co/api/people/1/").andReturn().getBody().asString());
+        JsonPath jsonPath = new JsonPath(get("http://swapi.co/api/people/1/").andReturn().getBody().asString());
         System.out.println("Getting json path name :" + jsonPath.getString("name"));
         assertEquals("Luke Skywalker",jsonPath.getString("name"));
     }
@@ -80,8 +83,26 @@ public class APIStepdefs extends BaseClass{
         authScheme.setPassword("TestPassword");
         RestAssured.authentication = authScheme;
         System.out.println(authScheme.generateAuthToken());
+    }
 
+    @Then("^Rest Assured - Cookie extraction$")
+    public void restAssuredCookieExtraction() throws Throwable {
+        Response response = get("http://www.tesco.co.uk");
+        Map<String,String> cookies = response.getCookies();
+        for (Map.Entry<String,String> cookie : cookies.entrySet()){
+            System.out.println("\nkey : " + cookie.getKey()+ " : value : " + cookie.getValue());
+        }
+    }
 
+    @Then("^Rest Assured - Single Cookie extraction$")
+    public void restAssuredCookieExtractionSingle() throws Throwable {
+        Response response = get("http://www.tesco.co.uk");
+        Cookie cookies = response.getDetailedCookie("atrc");
+
+        System.out.println("\nCookie has expiry date: "+cookies.hasExpiryDate());
+        System.out.println("\nCookie expiry date: "+cookies.getExpiryDate());
+        System.out.println("\nCookie value: "+cookies.getValue());
+        System.out.println("\nCookie value: "+cookies.getComment());
     }
 
     private class Person{
@@ -91,7 +112,7 @@ public class APIStepdefs extends BaseClass{
 
     @Then("^Rest Assured - JasonPath and Person class$")
     public void restAssuredJasonPathAndPersonClass() throws Throwable {
-        Response response = RestAssured.get("http://swapi.co/api/people/1/").andReturn();
+        Response response = get("http://swapi.co/api/people/1/").andReturn();
         String json = response.getBody().asString();
 
         System.out.println("Testing " + new JsonPath(json).getObject("$",Person.class));

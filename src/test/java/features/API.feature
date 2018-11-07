@@ -6,6 +6,12 @@ Feature: APIPOCTests
   Scenario: Navigate to a website and confirm the HTTP responce is 200
     Then Test to return the HTTP response of the server at location 'https://www.tesco.com'
 
+  Scenario: RestAssured GET request - Cookies
+    Then Rest Assured - Cookie extraction
+
+    Scenario: RestA get single cookie detailed information
+    Then Rest Assured - Single Cookie extraction
+
   Scenario: RestAssured GET request - SWAPI
     Then Rest Assured - Assert LUKE SKYWALKER the name data returned
 

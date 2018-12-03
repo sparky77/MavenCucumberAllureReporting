@@ -100,4 +100,14 @@ public class MyStepdefs extends BaseClass{
         System.out.println("User is successfully logged in method.. ");
     }
 
+    @And("^Searches for \'(.*)\'$")
+    public void searchesForProduct(String product) {
+        find(By.className("input-text-box  ")).sendKeys(product);
+        find(By.className("search-icon-button")).click();
+    }
+
+    @Then("^the user is landed on the search results page$")
+    public void theUserIsLandedOnTheSearchResultsPage() {
+       System.out.println("This is not yet done");
+    }
 }

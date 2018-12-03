@@ -20,6 +20,7 @@ public class BaseClass {
 
     public String baseUrl = setBaseUrl();
     public WebDriverLaucher driverLauncher;
+    Integer defaultWaitTimeOut = 10;
 
     public static String setBaseUrl(){
         return ReadFrom.propertiesFile("defaultSetupProperties","url");
@@ -39,6 +40,11 @@ public class BaseClass {
 
     public WebElement find(By locator){
         return WebDriverTypeConfig.driver.findElement(locator);
+    }
+
+    public void waitForExpectedElement(By by){
+        WebDriverWait wait = new WebDriverWait(WebDriverTypeConfig.driver,defaultWaitTimeOut);
+        wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
     //public WebElement click()

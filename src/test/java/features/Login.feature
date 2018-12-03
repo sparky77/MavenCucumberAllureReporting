@@ -13,9 +13,6 @@ Feature: BasicTescoPOCTests
     Then Test to return the HTTP responce of the server
     And close down webDriver Gracefully
 
-    Scenario: RestAssured GET request - SWAPI
-      Then Test Rest Assured - GET LUKE SKYWALKER
-
   Scenario: Guest users visits Tescos page and clicks on the x Cookie icon
     Then User clicks on close cookie policy button
     And close down webDriver Gracefully

@@ -4,6 +4,7 @@ import HelperClasses.WebDriver.WebDriverLaucher;
 import HelperClasses.WebDriver.WebDriverTypeConfig;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
@@ -13,7 +14,6 @@ import java.net.URL;
 import java.sql.SQLOutput;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
-
 /**
  * Created by marcus on 29/04/2018.
  * This below class is HelperClasses to be extended by any class using the webDriver.
@@ -23,7 +23,7 @@ public class BaseClass {
 
     public String baseUrl = setBaseUrl();
     public WebDriverLaucher driverLauncher;
-    Integer defaultWaitTimeOut = 10;
+    private Integer defaultWaitTimeOut = 10;
 
     public static String setBaseUrl(){
         return ReadFrom.propertiesFile("defaultSetupProperties","url");
@@ -50,8 +50,15 @@ public class BaseClass {
     // this will be master wait element
     public WebElement waitForExpectedElement(By by){
         WebDriverWait wait = new WebDriverWait(WebDriverTypeConfig.driver,defaultWaitTimeOut);
-        System.out.println("\n WAIT SUCCESS :: Element : " + by + " Found successfully");
-        return wait.until(ExpectedConditions.presenceOfElementLocated(by));
+        System.out.println("\n WAIT STARTED :: Element : " + by + " Being searched for");
+        try {
+            return wait.until(ExpectedConditions.presenceOfElementLocated(by));
+        } catch (Exception e) {
+            System.out.println("\nERROR ::  ELEMENT "+by+" Could not be located");
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     // Below is experimental - but working with intergrated fluent wait
@@ -69,13 +76,22 @@ public class BaseClass {
     public void webDriverPerform(String action, By by, String ...requiredText) throws Exception{
         switch (action){
             case "click":
-                click(by);
-                        break;
+                find(by).click();
+                break;
             case "enterText":
-                find(by).sendKeys(requiredText);
+                find(by).sendKeys(requiredText[0]);
+                break;
+            case "selectValueFromDropDown":
+                Select select = new Select(find(by));
+                select.selectByVisibleText(requiredText[0]);
+                break;
+            case "getText":
+                find(by).getText();
+                break;
+            case "getValue":
+                find(by).getAttribute("value");
                 break;
         }
-
     }
 
     public void click(WebElement eleName) throws InterruptedException {

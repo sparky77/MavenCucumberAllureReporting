@@ -1,6 +1,6 @@
 package HelperClasses;
 
-import HelperClasses.WebDriver.WebDriverLaucher;
+import HelperClasses.WebDriver.WebDriverLauncher;
 import HelperClasses.WebDriver.WebDriverTypeConfig;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,20 +17,21 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 /**
  * Created by marcus on 29/04/2018.
  * This below class is HelperClasses to be extended by any class using the webDriver.
- * Writting clever custome methods to interact with page, without the need for extras, such as waits - work in progress
+ * Writing smart custom methods to interact with page, without the need for extras, such as waits - work in progress
  */
 public class BaseClass {
 
     public String baseUrl = setBaseUrl();
-    public WebDriverLaucher driverLauncher;
+    public WebDriverLauncher driverLauncher;
     private Integer defaultWaitTimeOut = 10;
+
 
     public static String setBaseUrl(){
         return ReadFrom.propertiesFile("defaultSetupProperties","url");
     }
 
     public void startDriver() throws MalformedURLException {
-       driverLauncher = new WebDriverLaucher();
+       driverLauncher = new WebDriverLauncher();
     }
 
     public void closeDownWebDriver(){

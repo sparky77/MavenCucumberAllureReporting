@@ -30,7 +30,6 @@ public class MyStepdefs extends BaseClass{
         WebDriverTypeConfig.driver.quit();
     }
 
-    @Test
     @Given("^User Navigaties to Tesco home page$")
     public void userNavigatiesToHomePage() throws Throwable {
         startDriver();
@@ -79,7 +78,7 @@ public class MyStepdefs extends BaseClass{
     @Given("^Test to return the HTTP responce of the server$")
     public void RequestHTTPResponceCode() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        System.out.println("Getting HTTP responce code method");
+        System.out.println("Getting HTTP response code method");
         System.out.println(getResponseCode(baseUrl));
     }
 

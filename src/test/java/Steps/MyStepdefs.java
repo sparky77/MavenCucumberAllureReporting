@@ -17,6 +17,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
+
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertTrue;
 
@@ -50,9 +52,10 @@ public class MyStepdefs extends BaseClass{
         assertTrue("Page title not as defined expected result"+ WebDriverTypeConfig.driver.getTitle(),HomePageTitle.equals(WebDriverTypeConfig.driver.getTitle()));
     }
 
-    @When("^User navigates to \"(.*)\"$")
-    public void NavToSite(String site){
-       WebDriverTypeConfig.driver.get(site);
+    @When("^User navigates to (.*)$")
+    public void NavToSite(String site) throws MalformedURLException {
+       startDriver();
+       visit(site);
     }
 
     @Test @Then("^the title should be \"(.*)\"")
@@ -100,10 +103,10 @@ public class MyStepdefs extends BaseClass{
         System.out.println("User is successfully logged in method.. ");
     }
 
-    @And("^Searches for \'(.*)\'$")
+    @And("^Searches for (.*)$")
     public void searchesForProduct(String product) {
-        find(By.className("input-text-box  ")).sendKeys(product);
-        find(By.className("search-icon-button")).click();
+        find(By.cssSelector("input.input-text-box")).sendKeys(product);
+        find(By.cssSelector("button.search-icon-button")).click();
     }
 
     @Then("^the user is landed on the search results page$")

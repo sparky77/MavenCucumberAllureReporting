@@ -23,7 +23,7 @@ public class BaseClass {
 
     public String baseUrl = setBaseUrl();
     public WebDriverLauncher driverLauncher;
-    private Integer defaultWaitTimeOut = 10;
+    private Integer defaultWaitTimeOut = 30000;
 
 
     public static String setBaseUrl(){
@@ -52,14 +52,7 @@ public class BaseClass {
     public WebElement waitForExpectedElement(By by){
         WebDriverWait wait = new WebDriverWait(WebDriverTypeConfig.driver,defaultWaitTimeOut);
         System.out.println("\n WAIT STARTED :: Element : " + by + " Being searched for");
-        try {
-            return wait.until(ExpectedConditions.presenceOfElementLocated(by));
-        } catch (Exception e) {
-            System.out.println("\nERROR ::  ELEMENT "+by+" Could not be located");
-            e.printStackTrace();
-        }
-
-        return null;
+        return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
     // Below is experimental - but working with intergrated fluent wait

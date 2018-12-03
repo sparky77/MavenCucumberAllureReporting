@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLOutput;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 /**
  * Created by marcus on 29/04/2018.
@@ -39,20 +42,40 @@ public class BaseClass {
     }
 
     public WebElement find(By locator){
-        return WebDriverTypeConfig.driver.findElement(locator);
+        return waitForExpectedElement(locator);
+        //return WebDriverTypeConfig.driver.findElement(locator);
     }
 
-    public void waitForExpectedElement(By by){
+    // Below method should wait for for the expected element to be present - then return the element so it can be interacted with
+    // this will be master wait element
+    public WebElement waitForExpectedElement(By by){
         WebDriverWait wait = new WebDriverWait(WebDriverTypeConfig.driver,defaultWaitTimeOut);
-        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+        System.out.println("\n WAIT SUCCESS :: Element : " + by + " Found successfully");
+        return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
-
-    //public WebElement click()
 
     // Below is experimental - but working with intergrated fluent wait
     public void click(By locator)throws Exception{
-        WebDriverWait wait = new WebDriverWait(WebDriverTypeConfig.driver,10);
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+        waitForExpectedElement(locator).click();
+        // Below is working - but above is better
+        //WebDriverWait wait = new WebDriverWait(WebDriverTypeConfig.driver,10);
+        //wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+    }
+
+    // Master interaction switch statement
+    // will wait for presence of element
+    // then try to perform the requested action
+    // click / enter text / select dropdown selection
+    public void webDriverPerform(String action, By by, String ...requiredText) throws Exception{
+        switch (action){
+            case "click":
+                click(by);
+                        break;
+            case "enterText":
+                find(by).sendKeys(requiredText);
+                break;
+        }
+
     }
 
     public void click(WebElement eleName) throws InterruptedException {

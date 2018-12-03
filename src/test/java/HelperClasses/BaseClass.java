@@ -22,12 +22,9 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 public class BaseClass {
 
     public String baseUrl = setBaseUrl();
-<<<<<<< HEAD
     public WebDriverLauncher driverLauncher;
-=======
-    public WebDriverLaucher driverLauncher;
     private Integer defaultWaitTimeOut = 10;
->>>>>>> 3aa7fedb61fbf39375bf3b7e0e3bfe8cc54cc410
+
 
     public static String setBaseUrl(){
         return ReadFrom.propertiesFile("defaultSetupProperties","url");

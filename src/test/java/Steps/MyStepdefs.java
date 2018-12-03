@@ -38,7 +38,8 @@ public class MyStepdefs extends BaseClass{
 
     @Then("^User clicks on close cookie policy button")
     public void userClicksCloseCookiePoliceButton() throws Exception {
-        click(By.className("announcement-close-icon"));
+        webDriverPerform("click",By.className("announcement-close-icon"));
+        //click(By.className("announcement-close-icon"));
     }
 
 

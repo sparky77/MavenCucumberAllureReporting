@@ -103,6 +103,26 @@ public class MyStepdefs extends BaseClass{
         System.out.println("User is successfully logged in method.. ");
     }
 
+    @And("Enter text '(.*)' to the firstname field")
+    public void enterTextToFieldFirstName(String textToEnter) throws InterruptedException {
+
+       By firstNameInputBox = By.name("firstname");
+       find(firstNameInputBox).sendKeys(textToEnter);
+       Thread.sleep(3000);
+        System.out.println("\nValue in firstname input box is : " + find(firstNameInputBox).getAttribute("value"));
+
+    }
+
+    @And("Enter text '(.*)' to the surname field")
+    public void enterTextToFieldSurName(String textToEnter) throws InterruptedException {
+
+        By secondNameInputField = By.name("lastname");
+        find(secondNameInputField).sendKeys(textToEnter);
+        Thread.sleep(3000);
+        System.out.println("\nValue in surname input box is : " + find(secondNameInputField).getAttribute("value"));
+
+    }
+
     @And("^Searches for (.*)$")
     public void searchesForProduct(String product) {
         find(By.cssSelector("input.input-text-box")).sendKeys(product);

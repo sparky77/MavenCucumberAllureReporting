@@ -23,7 +23,7 @@ public class BaseClass {
 
     public String baseUrl = setBaseUrl();
     public WebDriverLauncher driverLauncher;
-    private Integer defaultWaitTimeOut = 30000;
+    private static Integer defaultWaitTimeOut = 30000;
 
 
     public static String setBaseUrl(){
@@ -42,14 +42,14 @@ public class BaseClass {
         WebDriverTypeConfig.driver.get(url);
     }
 
-    public WebElement find(By locator){
+    public static WebElement find(By locator){
         return waitForExpectedElement(locator);
         //return WebDriverTypeConfig.driver.findElement(locator);
     }
 
     // Below method should wait for for the expected element to be present - then return the element so it can be interacted with
     // this will be master wait element
-    public WebElement waitForExpectedElement(By by){
+    public static WebElement waitForExpectedElement(By by){
         WebDriverWait wait = new WebDriverWait(WebDriverTypeConfig.driver,defaultWaitTimeOut);
         System.out.println("\n WAIT STARTED :: Element : " + by + " Being searched for");
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));

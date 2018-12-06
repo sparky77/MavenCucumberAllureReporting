@@ -3,6 +3,7 @@ package Steps;
 import HelperClasses.BaseClass;
 import HelperClasses.ReadFrom;
 import HelperClasses.WebDriver.WebDriverTypeConfig;
+import Pages.ToolsQAAutomationPracticePage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -104,13 +105,8 @@ public class MyStepdefs extends BaseClass{
     }
 
     @And("Enter text '(.*)' to the firstname field")
-    public void enterTextToFieldFirstName(String textToEnter) throws InterruptedException {
-
-       By firstNameInputBox = By.name("firstname");
-       find(firstNameInputBox).sendKeys(textToEnter);
-       Thread.sleep(3000);
-        System.out.println("\nValue in firstname input box is : " + find(firstNameInputBox).getAttribute("value"));
-
+    public void enterTextToFieldFirstName(String firstName) throws InterruptedException {
+         ToolsQAAutomationPracticePage.enterFirstName(firstName);
     }
 
     @And("Enter text '(.*)' to the surname field")

@@ -1,6 +1,7 @@
 package Pages;
 
 import HelperClasses.BaseClass;
+import HelperClasses.ENUM.SeleniumActionTypes;
 import org.openqa.selenium.By;
 
 
@@ -22,7 +23,7 @@ public class ToolsQAAutomationPracticePage {
 
     public static void selectContinent(String continent) throws Exception {
         By ByDropDownName = By.id("continents");
-        BaseClass.webDriverPerform("selectValueFromDropDown",ByDropDownName,"Europe");
+        BaseClass.webDriverPerform(SeleniumActionTypes.SelectFromDropDown,ByDropDownName,"Europe");
         Thread.sleep(3000);
         System.out.println("\nValue selected from Continents is : " + BaseClass.find(ByDropDownName).getAttribute("value"));
     }

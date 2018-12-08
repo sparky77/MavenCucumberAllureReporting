@@ -1,6 +1,7 @@
 package Steps;
 
 import HelperClasses.BaseClass;
+import HelperClasses.ENUM.SeleniumActionTypes;
 import HelperClasses.ReadFrom;
 import HelperClasses.WebDriver.WebDriverTypeConfig;
 import Pages.ToolsQAAutomationPracticePage;
@@ -41,8 +42,7 @@ public class MyStepdefs extends BaseClass{
 
     @Then("^User clicks on close cookie policy button")
     public void userClicksCloseCookiePoliceButton() throws Exception {
-        webDriverPerform("click",By.className("announcement-close-icon"));
-        //click(By.className("announcement-close-icon"));
+        webDriverPerform(SeleniumActionTypes.click,By.className("announcement-close-icon"));
     }
 
 

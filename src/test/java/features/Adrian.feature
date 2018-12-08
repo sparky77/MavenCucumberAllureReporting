@@ -4,7 +4,6 @@ Feature: Adrian's learning
     When User navigates to <url>
     And Enter text '<firstName>' to the firstname field
     And Enter text '<surName>' to the surname field
-    #Then the user is landed on the search results page
     And close down webDriver Gracefully
     Examples:
       |url                                              | firstName  |  surName  |

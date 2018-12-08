@@ -13,4 +13,12 @@ public class ToolsQAAutomationPracticePage {
         System.out.println("\nValue in firstname input box is : " + BaseClass.find(firstNameInputBox).getAttribute("value"));
     }
 
+    public static void enterLastName(String LastName)throws InterruptedException {
+        By secondNameInputField = By.name("lastname");
+        BaseClass.find(secondNameInputField).sendKeys(LastName);
+        Thread.sleep(3000);
+        System.out.println("\nValue in surname input box is : " + BaseClass.find(secondNameInputField).getAttribute("value"));
+
+    }
+
 }

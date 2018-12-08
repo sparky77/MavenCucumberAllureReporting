@@ -110,13 +110,8 @@ public class MyStepdefs extends BaseClass{
     }
 
     @And("Enter text '(.*)' to the surname field")
-    public void enterTextToFieldSurName(String textToEnter) throws InterruptedException {
-
-        By secondNameInputField = By.name("lastname");
-        find(secondNameInputField).sendKeys(textToEnter);
-        Thread.sleep(3000);
-        System.out.println("\nValue in surname input box is : " + find(secondNameInputField).getAttribute("value"));
-
+    public void enterTextToFieldSurName(String lastName) throws InterruptedException {
+          ToolsQAAutomationPracticePage.enterLastName(lastName);
     }
 
     @And("^Searches for (.*)$")

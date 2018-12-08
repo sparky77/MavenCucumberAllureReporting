@@ -67,7 +67,7 @@ public class BaseClass {
     // will wait for presence of element
     // then try to perform the requested action
     // click / enter text / select dropdown selection
-    public void webDriverPerform(String action, By by, String ...requiredText) throws Exception{
+    public static void webDriverPerform(String action, By by, String... requiredText) throws Exception{
         switch (action){
             case "click":
                 find(by).click();

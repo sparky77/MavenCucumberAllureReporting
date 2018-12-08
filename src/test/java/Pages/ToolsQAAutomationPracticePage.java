@@ -18,7 +18,13 @@ public class ToolsQAAutomationPracticePage {
         BaseClass.find(secondNameInputField).sendKeys(LastName);
         Thread.sleep(3000);
         System.out.println("\nValue in surname input box is : " + BaseClass.find(secondNameInputField).getAttribute("value"));
+    }
 
+    public static void selectContinent(String continent) throws Exception {
+        By ByDropDownName = By.id("continents");
+        BaseClass.webDriverPerform("selectValueFromDropDown",ByDropDownName,"Europe");
+        Thread.sleep(3000);
+        System.out.println("\nValue selected from Continents is : " + BaseClass.find(ByDropDownName).getAttribute("value"));
     }
 
 }

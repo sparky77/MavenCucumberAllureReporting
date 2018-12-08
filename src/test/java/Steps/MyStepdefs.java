@@ -104,14 +104,19 @@ public class MyStepdefs extends BaseClass{
         System.out.println("User is successfully logged in method.. ");
     }
 
-    @And("Enter text '(.*)' to the firstname field")
+    @And("Enters text '(.*)' to the firstname field")
     public void enterTextToFieldFirstName(String firstName) throws InterruptedException {
          ToolsQAAutomationPracticePage.enterFirstName(firstName);
     }
 
-    @And("Enter text '(.*)' to the surname field")
+    @And("Enters text '(.*)' to the surname field")
     public void enterTextToFieldSurName(String lastName) throws InterruptedException {
           ToolsQAAutomationPracticePage.enterLastName(lastName);
+    }
+
+    @When("^Selects '(.*)' from continents drop down$")
+    public void selectContinent(String continent) throws Exception {
+       ToolsQAAutomationPracticePage.selectContinent(continent);
     }
 
     @And("^Searches for (.*)$")

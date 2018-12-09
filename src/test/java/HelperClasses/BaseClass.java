@@ -40,7 +40,8 @@ public class BaseClass {
         driverLauncher.CloseWebDriver();
     }
 
-    public void visit(String url){
+    public void visit(String url) throws MalformedURLException {
+        startDriver();
         WebDriverTypeConfig.driver.get(url);
     }
 

@@ -38,6 +38,7 @@ public class MyStepdefs extends BaseClass{
 
     @Given("^User Navigaties to Animed home page$")
     public void userNavigatiesToHomePage() throws Throwable {
+        System.out.println("****************** **************************** Testing - MAVEN CAN YOU SEE ME?!");
         startDriver();
         System.out.println("****************** **************************** Testing - MAVEN CAN YOU SEE ME?!");
 

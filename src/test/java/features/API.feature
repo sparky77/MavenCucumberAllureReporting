@@ -15,7 +15,6 @@ Feature: APIPOCTests
   Scenario: RestAssured GET request - SWAPI
     Then Rest Assured - Assert LUKE SKYWALKER the name data returned
 
-  @regAll
   Scenario: Rest Assured - return all information
     Then Rest Assured - return all information
 

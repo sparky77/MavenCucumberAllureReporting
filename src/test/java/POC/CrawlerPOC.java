@@ -32,13 +32,13 @@ public class CrawlerPOC {
     ArrayList<String> activeLinks;
     HttpURLConnection connection;
 
-    @BeforeTest
+    //@BeforeTest
     public void setup(){
         setupDriverAndOpenURL();
         linkExtractionAndSanitation();
     }
 
-    @AfterTest
+    //@AfterTest
     public void tearDown(){
         System.out.println("Running tear down");
         driver.quit();

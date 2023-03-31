@@ -2,7 +2,6 @@
 Feature: animeddirect POC Tests
   This feature will perform basic POC tests against the animeddirect website
 
-  @regAll
   Background: #This is called before every test
     Given User Navigaties to Animed home page
     #And create person object

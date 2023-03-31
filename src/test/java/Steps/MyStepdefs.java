@@ -85,7 +85,7 @@ public class MyStepdefs extends BaseClass{
         wait.until(ExpectedConditions.elementToBeClickable(clickableElement)).click();
     }
 
-    @Test
+
     @Given("^Test to return the HTTP responce of the server$")
     public void RequestHTTPResponceCode() throws Throwable {
         // Write code here that turns the phrase above into concrete actions

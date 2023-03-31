@@ -6,8 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -55,9 +53,6 @@ public abstract class WebDriverTypeConfig {
                 driver = new RemoteWebDriver(new URL("https://batbsauto_IG7R8rDiiDf:vNhrigLoLtzizHEKhTti@hub-cloud.browserstack.com/wd/hub"), caps);
                 driver.manage().window().maximize();
                 break;
-            case "phantomjs":
-                phantomJSDriverOSPathConstructor();
-                break;
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
@@ -89,16 +84,6 @@ public abstract class WebDriverTypeConfig {
         driver = new FirefoxDriver();
     }
 
-    private void phantomJSDriverOSPathConstructor() {
-        if (osType.contains("Mac")) {
-            modifiedOSDriverLocation = classPathRoot + resourceDriverLocation + "Mac/phantomjs";
-        } else if (osType.contains("Windows")) {
-            modifiedOSDriverLocation = classPathRoot + resourceDriverLocation + "Win/phantomjs.exe";
-        }
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, modifiedOSDriverLocation);
-        driver = new PhantomJSDriver(caps);
-    }
 
     private void chromeDriverOSPathConstructor() {
         if (osType.contains("Mac")) {

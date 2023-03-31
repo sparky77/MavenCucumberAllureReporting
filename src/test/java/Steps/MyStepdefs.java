@@ -1,14 +1,14 @@
 package Steps;
 
 import HelperClasses.BaseClass;
+import HelperClasses.ENUM.SeleniumActionTypes;
 import HelperClasses.ReadFrom;
 import HelperClasses.WebDriver.WebDriverTypeConfig;
+import Pages.ToolsQAFormPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,7 +19,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 
-import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertTrue;
 
 public class MyStepdefs extends BaseClass{
@@ -34,28 +33,18 @@ public class MyStepdefs extends BaseClass{
 
     @Given("^User Navigaties to Tesco home page$")
     public void userNavigatiesToHomePage() throws Throwable {
-        startDriver();
         visit(baseUrl);
     }
 
     @Then("^User clicks on close cookie policy button")
     public void userClicksCloseCookiePoliceButton() throws Exception {
-        webDriverPerform("click",By.className("announcement-close-icon"));
-        //click(By.className("announcement-close-icon"));
+        webDriverPerform(SeleniumActionTypes.click,By.className("announcement-close-icon"));
     }
-
 
     @Then("^Check the homePage title is as expected$")
     public void getAndComparePageTitle(){
-        //System.out.println(HomePageTitle);
         // TODO will implement HomePage obj here as POC
         assertTrue("Page title not as defined expected result"+ WebDriverTypeConfig.driver.getTitle(),HomePageTitle.equals(WebDriverTypeConfig.driver.getTitle()));
-    }
-
-    @When("^User navigates to (.*)$")
-    public void NavToSite(String site) throws MalformedURLException {
-       startDriver();
-       visit(site);
     }
 
     @Test @Then("^the title should be \"(.*)\"")
@@ -65,12 +54,6 @@ public class MyStepdefs extends BaseClass{
         Assert.assertEquals(WebDriverTypeConfig.driver.getTitle(), text);
     }
 
-    @And("^close down webDriver Gracefully")
-    public void quiteWebDriver(){
-        System.out.println("Closing down webDriver");
-        System.out.println("...................");
-        closeDownWebDriver();
-    }
 
     private void waitForClickableElementAndClick(String elementName) {
         WebElement clickableElement = find(By.className(elementName)); // "announcement-close-icon"
@@ -103,25 +86,6 @@ public class MyStepdefs extends BaseClass{
         System.out.println("User is successfully logged in method.. ");
     }
 
-    @And("Enter text '(.*)' to the firstname field")
-    public void enterTextToFieldFirstName(String textToEnter) throws InterruptedException {
-
-       By firstNameInputBox = By.name("firstname");
-       find(firstNameInputBox).sendKeys(textToEnter);
-       Thread.sleep(3000);
-        System.out.println("\nValue in firstname input box is : " + find(firstNameInputBox).getAttribute("value"));
-
-    }
-
-    @And("Enter text '(.*)' to the surname field")
-    public void enterTextToFieldSurName(String textToEnter) throws InterruptedException {
-
-        By secondNameInputField = By.name("lastname");
-        find(secondNameInputField).sendKeys(textToEnter);
-        Thread.sleep(3000);
-        System.out.println("\nValue in surname input box is : " + find(secondNameInputField).getAttribute("value"));
-
-    }
 
     @And("^Searches for (.*)$")
     public void searchesForProduct(String product) {

@@ -1,7 +1,9 @@
 package HelperClasses;
 
+import HelperClasses.ENUM.SeleniumActionTypes;
 import HelperClasses.WebDriver.WebDriverLauncher;
 import HelperClasses.WebDriver.WebDriverTypeConfig;
+import org.apache.commons.lang.enums.Enum;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -23,7 +25,7 @@ public class BaseClass {
 
     public String baseUrl = setBaseUrl();
     public WebDriverLauncher driverLauncher;
-    private Integer defaultWaitTimeOut = 30000;
+    private static Integer defaultWaitTimeOut = 5; // 5 seconds
 
 
     public static String setBaseUrl(){
@@ -38,51 +40,48 @@ public class BaseClass {
         driverLauncher.CloseWebDriver();
     }
 
-    public void visit(String url){
+    public void visit(String url) throws MalformedURLException {
+        startDriver();
         WebDriverTypeConfig.driver.get(url);
     }
 
-    public WebElement find(By locator){
+    public static WebElement find(By locator){
         return waitForExpectedElement(locator);
-        //return WebDriverTypeConfig.driver.findElement(locator);
     }
 
     // Below method should wait for for the expected element to be present - then return the element so it can be interacted with
     // this will be master wait element
-    public WebElement waitForExpectedElement(By by){
+    // DOES THIS METHOD NEED TRY CATCH - WHAT IF FAILURE ??
+    public static WebElement waitForExpectedElement(By by){
         WebDriverWait wait = new WebDriverWait(WebDriverTypeConfig.driver,defaultWaitTimeOut);
         System.out.println("\n WAIT STARTED :: Element : " + by + " Being searched for");
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    // Below is experimental - but working with intergrated fluent wait
     public void click(By locator)throws Exception{
         waitForExpectedElement(locator).click();
-        // Below is working - but above is better
-        //WebDriverWait wait = new WebDriverWait(WebDriverTypeConfig.driver,10);
-        //wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
     }
 
     // Master interaction switch statement
     // will wait for presence of element
     // then try to perform the requested action
     // click / enter text / select dropdown selection
-    public void webDriverPerform(String action, By by, String ...requiredText) throws Exception{
+    public static void webDriverPerform(SeleniumActionTypes action, By by, String... requiredText) throws Exception{
         switch (action){
-            case "click":
+            case click:
                 find(by).click();
                 break;
-            case "enterText":
+            case enterText:
                 find(by).sendKeys(requiredText[0]);
                 break;
-            case "selectValueFromDropDown":
+            case SelectFromDropDown:
                 Select select = new Select(find(by));
                 select.selectByVisibleText(requiredText[0]);
                 break;
-            case "getText":
+            case getText:
                 find(by).getText();
                 break;
-            case "getValue":
+            case getValue:
                 find(by).getAttribute("value");
                 break;
         }

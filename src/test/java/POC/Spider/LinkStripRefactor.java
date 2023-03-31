@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Example program to list links from a URL.
  */
 
-public class LinkStrip {
+public class LinkStripRefactor {
 
     @Test
     public void testCrawler() throws IOException {

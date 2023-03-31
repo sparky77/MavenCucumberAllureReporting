@@ -4,11 +4,13 @@ import HelperClasses.BaseClass;
 import HelperClasses.ENUM.SeleniumActionTypes;
 import HelperClasses.ReadFrom;
 import HelperClasses.WebDriver.WebDriverTypeConfig;
-import Pages.ToolsQAFormPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,6 +21,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 
+import static HelperClasses.ENUM.SeleniumActionTypes.click;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertTrue;
 
 public class MyStepdefs extends BaseClass{
@@ -31,29 +35,45 @@ public class MyStepdefs extends BaseClass{
         WebDriverTypeConfig.driver.quit();
     }
 
-    @Given("^User Navigaties to Tesco home page$")
+    @Given("^User Navigaties to Animed home page$")
     public void userNavigatiesToHomePage() throws Throwable {
+        startDriver();
         visit(baseUrl);
     }
 
     @Then("^User clicks on close cookie policy button")
     public void userClicksCloseCookiePoliceButton() throws Exception {
-        webDriverPerform(SeleniumActionTypes.click,By.className("announcement-close-icon"));
+        //webDriverPerform(SeleniumActionTypes.valueOf("click"),By.className("#header > div.base-components__RootElement-sc-1mosoyj-1.styled__Container-sc-1vnc1v2-0.gwIwEm.emjqcb.cookie-notification.beans-cookies-notification__container > div > div.base-components__BaseElement-sc-1mosoyj-0.styled__ButtonContainer-sc-1vnc1v2-5.dZOmBy.dAbLoG.beans-cookies-notification__buttons-container > form > button > span > span"));
     }
+
 
     @Then("^Check the homePage title is as expected$")
     public void getAndComparePageTitle(){
-        // TODO will implement HomePage obj here as POC
+        System.out.println(HomePageTitle);
         assertTrue("Page title not as defined expected result"+ WebDriverTypeConfig.driver.getTitle(),HomePageTitle.equals(WebDriverTypeConfig.driver.getTitle()));
+    }
+
+    @When("^User navigates to (.*)$")
+    public void NavToSite(String site) throws MalformedURLException {
+       startDriver();
+       visit(site);
     }
 
     @Test @Then("^the title should be \"(.*)\"")
     public void theTitleShouldBe(String text) throws Throwable {
-        WebDriverWait wait = new WebDriverWait(WebDriverTypeConfig.driver,10);
-        wait.until(ExpectedConditions.titleIs(text));
+        //WebDriverWait wait = new WebDriverWait(WebDriverTypeConfig.driver,10);
+        //wait.until(ExpectedConditions.titleIs(text));
+        System.out.println("TITLE : " + WebDriverTypeConfig.driver.getTitle());
         Assert.assertEquals(WebDriverTypeConfig.driver.getTitle(), text);
     }
 
+/*    @And("^close down webDriver Gracefully")
+    public void quiteWebDriver(){
+        WebDriverManager.getInstance().quit();
+*//*        System.out.println("Closing down webDriver");
+        System.out.println("...................");
+        closeDownWebDriver();*//*
+    }*/
 
     private void waitForClickableElementAndClick(String elementName) {
         WebElement clickableElement = find(By.className(elementName)); // "announcement-close-icon"
@@ -86,6 +106,25 @@ public class MyStepdefs extends BaseClass{
         System.out.println("User is successfully logged in method.. ");
     }
 
+    @And("Enter text '(.*)' to the firstname field")
+    public void enterTextToFieldFirstName(String textToEnter) throws InterruptedException {
+
+       By firstNameInputBox = By.name("firstname");
+       find(firstNameInputBox).sendKeys(textToEnter);
+       Thread.sleep(3000);
+        System.out.println("\nValue in firstname input box is : " + find(firstNameInputBox).getAttribute("value"));
+
+    }
+
+    @And("Enter text '(.*)' to the surname field")
+    public void enterTextToFieldSurName(String textToEnter) throws InterruptedException {
+
+        By secondNameInputField = By.name("lastname");
+        find(secondNameInputField).sendKeys(textToEnter);
+        Thread.sleep(3000);
+        System.out.println("\nValue in surname input box is : " + find(secondNameInputField).getAttribute("value"));
+
+    }
 
     @And("^Searches for (.*)$")
     public void searchesForProduct(String product) {

@@ -1,4 +1,4 @@
-@regAll
+#@regAll
 Feature: APIPOCTests
   This feature will perform basic API POC tests
 

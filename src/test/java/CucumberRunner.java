@@ -4,7 +4,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        //features={"C:\\Users\\marcus\\Documents\\MavenCucumberTestProj\\src\\test\\java\\features"},
         features={"src/test/java/features"},tags = {"@regAll"},
         monochrome = true,
         glue = {"Steps"},

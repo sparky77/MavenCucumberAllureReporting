@@ -1,6 +1,7 @@
 package HelperClasses.WebDriver;
 
 import HelperClasses.ReadFrom;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -29,13 +30,16 @@ public abstract class WebDriverTypeConfig {
 
         switch(driverType.toLowerCase()) {
             case "chrome":
-                chromeDriverOSPathConstructor();
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+                //chromeDriverOSPathConstructor();
                 break;
             case "phantomjs":
                 phantomJSDriverOSPathConstructor();
                 break;
             case "firefox":
-                fireFoxDriverOSPathConstructor();
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
                 break;
             case "gridchrome":
                 System.out.println("Grid setup to go here");
@@ -103,7 +107,7 @@ public abstract class WebDriverTypeConfig {
     }
 
     public void CloseWebDriver(){
-        driver.quit();
+
         //driver = null;
     }
 

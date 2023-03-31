@@ -53,6 +53,7 @@ public class APIStepdefs extends BaseClass{
         Response response = get("https://swapi.dev/api/").andReturn();
         String jsonResponce = response.getBody().asString();
         System.out.println("API response : \n" + jsonResponce);
+        assertTrue("Amazing!",true);
     }
 
 

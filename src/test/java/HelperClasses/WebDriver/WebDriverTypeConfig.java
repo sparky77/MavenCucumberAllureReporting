@@ -4,6 +4,7 @@ import HelperClasses.ReadFrom;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
@@ -33,6 +34,26 @@ public abstract class WebDriverTypeConfig {
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
                 //chromeDriverOSPathConstructor();
+                break;
+            case "remote":
+                // TRYING to fire remote driver for BS
+                DesiredCapabilities caps = new DesiredCapabilities();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--ignore-ssl-errors=yes");
+                options.addArguments("--ignore-certificate-errors");
+                options.addArguments("--disable-web-security");
+                options.addArguments("--test-type");
+                options.addArguments("allow-running-insecure-content");
+                caps.setCapability(ChromeOptions.CAPABILITY, options);
+
+                caps.setCapability("browser", "chrome");
+                caps.setCapability("browser_version", "100");
+                caps.setCapability("os", "windows");
+                caps.setCapability("os_version", "11");
+                caps.setCapability("seleniumVersion", "4.2.2");
+                caps.setCapability("project", "BAT");
+                driver = new RemoteWebDriver(new URL("https://batbsauto_IG7R8rDiiDf:vNhrigLoLtzizHEKhTti@hub-cloud.browserstack.com/wd/hub"), caps);
+                driver.manage().window().maximize();
                 break;
             case "phantomjs":
                 phantomJSDriverOSPathConstructor();

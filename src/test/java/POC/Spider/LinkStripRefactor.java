@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class LinkStripRefactor {
 
-    @Test
+    //@Test
     public void testCrawler() throws IOException {
         siteToCrawl("https://www-eu-uat-global-vype.non-prod.marketing.bat.net/uk/");
     }

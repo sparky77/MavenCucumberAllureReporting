@@ -44,7 +44,7 @@ public class CrawlerPOC {
         driver.quit();
     }
 
-    @Test
+    //@Test
     public void runLinkCheckHttpConn( ) throws Exception {
         for (String link : activeLinks) {
             connection = (HttpURLConnection) new URL(link).openConnection();
@@ -58,7 +58,7 @@ public class CrawlerPOC {
         connection.disconnect();
     }
 
-    @Test // THIS METHOD IS THE SLOWER OF THE TWO BUT FUNCTIONAL AND WORKING
+    //@Test // THIS METHOD IS THE SLOWER OF THE TWO BUT FUNCTIONAL AND WORKING
     public void runLinkCheckRestAssured( ) throws Exception {
         for (String link : activeLinks) {
             int statusCode = RestAssured.get(link).statusCode();

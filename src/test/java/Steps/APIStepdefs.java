@@ -50,7 +50,7 @@ public class APIStepdefs extends BaseClass{
 
     @Then("^Rest Assured - return all information$")
     public void RestAssuredReturnAllInformation() {
-        Response response = get("http://swapi.co/api/people/1/").andReturn();
+        Response response = get("https://swapi.dev/api/").andReturn();
         String jsonResponce = response.getBody().asString();
         System.out.println("API response : \n" + jsonResponce);
     }

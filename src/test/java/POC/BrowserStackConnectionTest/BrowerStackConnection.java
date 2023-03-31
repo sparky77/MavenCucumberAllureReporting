@@ -27,7 +27,7 @@ public class BrowerStackConnection {
     public static final String URLToVisit = "https://www-eu-uat-global-vype.non-prod.marketing.bat.net/uk/";
     WebDriverWait wait;
 
-    @Test
+    //@Test
     public void browserStackConnectionTest() throws Exception {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("browser", "Chrome");

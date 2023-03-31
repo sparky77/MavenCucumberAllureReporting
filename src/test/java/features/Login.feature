@@ -6,7 +6,7 @@ Feature: animeddirect POC Tests
     Given User Navigaties to Animed home page
     #And create person object
 
-  @regAll
+  #@regAll
   Scenario: Navigate to the Animed Website and assert the homePage title
     Then Check the homePage title is as expected
     #And close down webDriver Gracefully

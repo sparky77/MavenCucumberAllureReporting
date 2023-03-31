@@ -40,12 +40,13 @@ public class MyStepdefs extends BaseClass{
     public void userNavigatiesToHomePage() throws Throwable {
         startDriver();
         System.out.println("****************** **************************** Testing - MAVEN CAN YOU SEE ME?!");
+
         visit(baseUrl);
     }
 
     @Then("^User clicks on close cookie policy button")
     public void userClicksCloseCookiePoliceButton() throws Exception {
-        //webDriverPerform(SeleniumActionTypes.valueOf("click"),By.className("#header > div.base-components__RootElement-sc-1mosoyj-1.styled__Container-sc-1vnc1v2-0.gwIwEm.emjqcb.cookie-notification.beans-cookies-notification__container > div > div.base-components__BaseElement-sc-1mosoyj-0.styled__ButtonContainer-sc-1vnc1v2-5.dZOmBy.dAbLoG.beans-cookies-notification__buttons-container > form > button > span > span"));
+        webDriverPerform(click,By.className("#header > div.base-components__RootElement-sc-1mosoyj-1.styled__Container-sc-1vnc1v2-0.gwIwEm.emjqcb.cookie-notification.beans-cookies-notification__container > div > div.base-components__BaseElement-sc-1mosoyj-0.styled__ButtonContainer-sc-1vnc1v2-5.dZOmBy.dAbLoG.beans-cookies-notification__buttons-container > form > button > span > span"));
     }
 
 

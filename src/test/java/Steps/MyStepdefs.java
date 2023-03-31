@@ -4,6 +4,7 @@ import HelperClasses.BaseClass;
 import HelperClasses.ENUM.SeleniumActionTypes;
 import HelperClasses.ReadFrom;
 import HelperClasses.WebDriver.WebDriverTypeConfig;
+import com.jcraft.jsch.Logger;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -38,6 +39,7 @@ public class MyStepdefs extends BaseClass{
     @Given("^User Navigaties to Animed home page$")
     public void userNavigatiesToHomePage() throws Throwable {
         startDriver();
+        System.out.println("****************** **************************** Testing - MAVEN CAN YOU SEE ME?!");
         visit(baseUrl);
     }
 
